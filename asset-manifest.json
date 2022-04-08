@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Casino/static/css/main.eb117e13.css",
+    "main.js": "/Casino/static/js/main.819c43b6.js",
+    "static/media/back of card.jpg": "/Casino/static/media/back of card.b8b582eeffbdc7e2b2f6.jpg",
+    "static/media/poker chip.png": "/Casino/static/media/poker chip.5e64034f2e375b1e1362.png",
+    "index.html": "/Casino/index.html",
+    "main.eb117e13.css.map": "/Casino/static/css/main.eb117e13.css.map",
+    "main.819c43b6.js.map": "/Casino/static/js/main.819c43b6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eb117e13.css",
+    "static/js/main.819c43b6.js"
+  ]
+}
