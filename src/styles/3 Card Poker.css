@@ -1,0 +1,11 @@
+.threeCard {
+    text-align: center;
+}
+
+.threeCard h1 {
+    font-size: 4em;
+    border-bottom: solid darkred;
+    background-color: black;
+    color: whitesmoke;
+    width: 100%;
+}
