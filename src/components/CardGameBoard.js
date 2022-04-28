@@ -2,123 +2,115 @@ import React from "react";
 import "../styles/CardGameBoard.css";
 import backOfCard from "../assets/back of card.jpg";
 import pokerChip from "../assets/poker chip.png";
-import { createDeckAndDraw } from "./api";
+import { foldHand } from "../components/foldHand";
+import { showDealersCards } from "../components/startGame";
+import Result, { startGame } from "../components/startGame";
 
-function ThreeCardPoker() {    
-    async function createDeck() {
-        const deck = await createDeckAndDraw();
-        return deck;
-    }
+function ThreeCardPoker() {  
     
-    async function startGame() {
-        
-        const deck = await createDeck();
-        deck.forEach((image, i) => {
-            document.getElementById(`card${i+1}`).src = deck[i].image;
-        })
-
-        let cards = Array.from(document.getElementsByClassName('card'));
-        
-        cards.forEach((card, i) => {
-            setTimeout(() => {
-                card.classList.add('visible')
-            }, i * 500)
-        })
-
-        let playerCards = Array.from(document.getElementsByClassName('player-card'));
-        
-        playerCards.forEach(card => {
-            card.addEventListener('click', () => {
-                card.classList.add('show')
-            })
-        })
-    }
-    
-    function foldHand() {
-        // show dealers cards for fun
-        showDealersCards();
-
-        // call function to remove bet from total money
-        
-        // add an overlay to call gameOver() to start new game
-        let overlays = Array.from(document.getElementsByClassName('overlay-text'));
-        overlays.forEach(overlay => {
-            overlay.classList.add('visible')
-        })
-        overlays.forEach(overlay => {
-            overlay.addEventListener('click', () => {
-                overlay.classList.remove('visible');
-                gameOver();
-            })
-        })
-    }
-    
-    function gameOver() {
-        let cards = Array.from(document.getElementsByClassName('card'));
-        cards.forEach(card => {
-            card.classList.remove('visible')
-        })
-
-        let dealerCards = Array.from(document.getElementsByClassName('dealer-card'));
-        
-        dealerCards.forEach(card => {
-            card.classList.remove('show')
-        })
-
-        let playerCards = Array.from(document.getElementsByClassName('player-card'));
-        
-        playerCards.forEach(card => {
-            card.classList.remove('show')
-        })
-    }
-    
-    function showDealersCards() {
-        let dealerCards = Array.from(document.getElementsByClassName('dealer-card'));
-        dealerCards.forEach((card, i) => {
-            setTimeout(() => {
-                card.classList.add('show')
-            }, i * 500)
-        })
-        
-        // function to calculate results of hand, show winnings/losings
-        
-        // add an overlay to call gameOver() to start a new game
-        let overlays = Array.from(document.getElementsByClassName('overlay-text'));
-        overlays.forEach(overlay => {
-            setTimeout(() => {
-                overlay.classList.add('visible')
-            }, 5000)
-        })
-        overlays.forEach(overlay => {
-            overlay.addEventListener('click', () => {
-                overlay.classList.remove('visible');
-                gameOver();
-            })
-        })
-    }
-
     function betPairPlus() {
-        let bet = Array.from(document.getElementsByClassName('pair-plus'));
-        bet.forEach(bet => {
-            document.getElementById('pair-plus').src = pokerChip;
+        let bet = document.getElementById('pair-plus');
+        let bet2 = document.getElementById('pair-plus2');
+        let bet3 = document.getElementById('pair-plus3');
+        let bet4 = document.getElementById('pair-plus4');
+        let betAmount = document.getElementById('pair-plus-bet-amount').innerHTML;
+        if (betAmount === "$0 Bet") {
+            bet.src = pokerChip;
             bet.classList.add('visible');
-        })
+            document.getElementById('pair-plus-bet-amount').innerHTML = "$5 Bet";
+        } else if (betAmount === "$5 Bet") {
+            bet2.src = pokerChip;
+            bet2.classList.add('visible');
+            document.getElementById('pair-plus-bet-amount').innerHTML = "$10 Bet";
+        } else if (betAmount === "$10 Bet") {
+            bet3.src = pokerChip;
+            bet3.classList.add('visible');
+            document.getElementById('pair-plus-bet-amount').innerHTML = "$15 Bet";
+        } else if (betAmount === "$15 Bet") {
+            bet4.src = pokerChip;
+            bet4.classList.add('visible');
+            document.getElementById('pair-plus-bet-amount').innerHTML = "$20 Bet";
+        } else {
+            bet.src = "";
+            bet2.src = "";
+            bet3.src = "";
+            bet4.src = "";
+            bet.classList.remove('visible');
+            bet2.classList.remove('visible');
+            bet3.classList.remove('visible');
+            bet4.classList.remove('visible');
+            document.getElementById('pair-plus-bet-amount').innerHTML = "$0 Bet";
+        }
     }
 
     function betAnte() {
-        let bet = Array.from(document.getElementsByClassName('ante'));
-        bet.forEach(bet => {
-            document.getElementById('ante').src = pokerChip;
+        let bet = document.getElementById('ante');
+        let bet2 = document.getElementById('ante2');
+        let bet3 = document.getElementById('ante3');
+        let bet4 = document.getElementById('ante4');
+        let betAmount = document.getElementById('ante-bet-amount').innerHTML;
+        if (betAmount === "$0 Bet") {
+            bet.src = pokerChip;
             bet.classList.add('visible');
-        })
+            document.getElementById('ante-bet-amount').innerHTML = "$5 Bet";
+        } else if (betAmount === "$5 Bet") {
+            bet2.src = pokerChip;
+            bet2.classList.add('visible');
+            document.getElementById('ante-bet-amount').innerHTML = "$10 Bet";
+        } else if (betAmount === "$10 Bet") {
+            bet3.src = pokerChip;
+            bet3.classList.add('visible');
+            document.getElementById('ante-bet-amount').innerHTML = "$15 Bet";
+        } else if (betAmount === "$15 Bet") {
+            bet4.src = pokerChip;
+            bet4.classList.add('visible');
+            document.getElementById('ante-bet-amount').innerHTML = "$20 Bet";
+        } else {
+            bet.src = "";
+            bet2.src = "";
+            bet3.src = "";
+            bet4.src = "";
+            bet.classList.remove('visible');
+            bet2.classList.remove('visible');
+            bet3.classList.remove('visible');
+            bet4.classList.remove('visible');
+            document.getElementById('ante-bet-amount').innerHTML = "$0 Bet";
+        }
     }
 
     function betPlay() {
-        let bet = Array.from(document.getElementsByClassName('play'));
-        bet.forEach(bet => {
-            document.getElementById('play').src = pokerChip;
+        let bet = document.getElementById('play');
+        let bet2 = document.getElementById('play2');
+        let bet3 = document.getElementById('play3');
+        let bet4 = document.getElementById('play4');
+        let betAmount = document.getElementById('play-bet-amount').innerHTML;
+        if (betAmount === "$0 Bet") {
+            bet.src = pokerChip;
             bet.classList.add('visible');
-        })
+            document.getElementById('play-bet-amount').innerHTML = "$5 Bet";
+        } else if (betAmount === "$5 Bet") {
+            bet2.src = pokerChip;
+            bet2.classList.add('visible');
+            document.getElementById('play-bet-amount').innerHTML = "$10 Bet";
+        } else if (betAmount === "$10 Bet") {
+            bet3.src = pokerChip;
+            bet3.classList.add('visible');
+            document.getElementById('play-bet-amount').innerHTML = "$15 Bet";
+        } else if (betAmount === "$15 Bet") {
+            bet4.src = pokerChip;
+            bet4.classList.add('visible');
+            document.getElementById('play-bet-amount').innerHTML = "$20 Bet";
+        } else {
+            bet.src = "";
+            bet2.src = "";
+            bet3.src = "";
+            bet4.src = "";
+            bet.classList.remove('visible');
+            bet2.classList.remove('visible');
+            bet3.classList.remove('visible');
+            bet4.classList.remove('visible');
+            document.getElementById('play-bet-amount').innerHTML = "$0 Bet";
+        }
     }
     
     return (
@@ -132,17 +124,26 @@ function ThreeCardPoker() {
                 </div>
                 <div className="bet-area">
                     <button onClick={betPairPlus} className="span-1 bet button">Pair Plus
-                        <img id="pair-plus" className="chip pair-plus" src="" alt="" />
+                        <img id="pair-plus" className="chip" src="" alt="" />
+                        <img id="pair-plus2" className="chip two" src="" alt="" />
+                        <img id="pair-plus3" className="chip three" src="" alt="" />
+                        <img id="pair-plus4" className="chip four" src="" alt="" />
                     </button>
-                    <small id="pair-plus-bet-amount" value=""></small>
+                    <small id="pair-plus-bet-amount">$0 Bet</small>
                     <button onClick={betAnte} className="span-1 bet button">Ante
-                        <img id="ante" className="chip ante" src="" alt="" />
+                        <img id="ante" className="chip" src="" alt="" />
+                        <img id="ante2" className="chip two" src="" alt="" />
+                        <img id="ante3" className="chip three" src="" alt="" />
+                        <img id="ante4" className="chip four" src="" alt="" />
                     </button>
-                    <small>$ Bet</small>
+                    <small id="ante-bet-amount">$0 Bet</small>
                     <button onClick={betPlay} className="span-1 bet button">Play
-                        <img id="play" className="chip play" src="" alt="" />
+                        <img id="play" className="chip" src="" alt="" />
+                        <img id="play2" className="chip two" src="" alt="" />
+                        <img id="play3" className="chip three" src="" alt="" />
+                        <img id="play4" className="chip four" src="" alt="" />
                     </button>
-                    <small>$ Bet</small>
+                    <small id="play-bet-amount">$0 Bet</small>
                 </div>
             </div>
 
@@ -246,6 +247,8 @@ function ThreeCardPoker() {
                 <h3>( Click each card to reveal )</h3>
                 <h3>( Press play to reveal dealers cards )</h3>
             </div>
+
+           <Result e="false"/>
     
         </div>
     );

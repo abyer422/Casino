@@ -94,6 +94,18 @@ body {
     display: block;
 }
 
+.two {
+    transform: translateX(10px);
+}
+
+.three {
+    transform: translateX(20px);
+}
+
+.four {
+    transform: translateX(30px);
+}
+
 .payout {
     color: whitesmoke;
     display: grid;
@@ -297,4 +309,19 @@ h3 {
     color: white;
     margin-top: .5em;
     font-size: 1.25em;
+}
+
+.results {
+    display: none;
+}
+
+.results.visible {
+    color:white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid black;
+    width: 11em;
+    font-size: 1.5em;
 }
